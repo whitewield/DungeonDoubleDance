@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace Global {
 
+	public enum BattlefieldSide {
+		Left = 0,
+		Right = 1,
+		End = 2,
+	}
+
 	public enum HeroType {
 		None,
 		Adam,
@@ -28,6 +34,15 @@ namespace Global {
 		B,
 		X,
 		Y,
+	}
+
+	public struct SkillInfo {
+		public string mySkillName;
+		public Key[] myPattern;
+		public SkillInfo (string g_name, Key[] g_pattern) {
+			mySkillName = g_name;
+			myPattern = g_pattern;
+		}
 	}
 
 	public class Constants {

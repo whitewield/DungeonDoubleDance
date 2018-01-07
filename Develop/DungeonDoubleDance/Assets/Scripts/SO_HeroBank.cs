@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Global;
 
-[CreateAssetMenu(fileName = "HeroBank", menuName = "Wield/HeroBank", order = 2)]
+[CreateAssetMenu(fileName = "HeroBank", menuName = "Wield/HeroBank", order = 1)]
 public class SO_HeroBank : ScriptableObject {
-	public List<HeroInfo> Front;
-	public List<HeroInfo> Back;
-	public List<HeroInfo> Double;
+	public List<HeroBankInfo> Front;
+	public List<HeroBankInfo> Back;
+	public List<HeroBankInfo> Double;
 
 
-	public HeroInfo emptyInfo;
+	public HeroBankInfo emptyInfo;
 
-	public List<HeroInfo> GetList (HeroClass g_class) {
+	public List<HeroBankInfo> GetList (HeroClass g_class) {
 		switch (g_class) {
 		case HeroClass.Front:
 			return Front;
@@ -25,8 +25,9 @@ public class SO_HeroBank : ScriptableObject {
 		return null;
 	}
 
+
 	public GameObject GetHeroPrefab (HeroType g_heroType) {
-		HeroInfo t_heroInfo = GetHeroInfo (g_heroType);
+		HeroBankInfo t_heroInfo = GetHeroBankInfo (g_heroType);
 
 		if (t_heroInfo.heroType == emptyInfo.heroType)
 			return null;
@@ -34,18 +35,24 @@ public class SO_HeroBank : ScriptableObject {
 		return t_heroInfo.prefab;
 	}
 
-	public HeroInfo GetHeroInfo (HeroType g_heroType) {
-		foreach (HeroInfo f_info in Front) {
+	public SkillInfo GetSkillInfo (HeroType g_heroType, int g_index) {
+		HeroBankInfo t_heroInfo = GetHeroBankInfo (g_heroType);
+
+		return t_heroInfo.skills [g_index].GetSkillInfo ();
+	}
+
+	public HeroBankInfo GetHeroBankInfo (HeroType g_heroType) {
+		foreach (HeroBankInfo f_info in Front) {
 			if (f_info.heroType == g_heroType)
 				return f_info;
 		}
 
-		foreach (HeroInfo f_info in Back) {
+		foreach (HeroBankInfo f_info in Back) {
 			if (f_info.heroType == g_heroType)
 				return f_info;
 		}
 
-		foreach (HeroInfo f_info in Double) {
+		foreach (HeroBankInfo f_info in Double) {
 			if (f_info.heroType == g_heroType)
 				return f_info;
 		}
@@ -55,7 +62,8 @@ public class SO_HeroBank : ScriptableObject {
 }
 
 [System.Serializable]
-public struct HeroInfo {
+public struct HeroBankInfo {
 	public HeroType heroType;
 	public GameObject prefab;
+	public SO_SkillInfo[] skills;
 }

@@ -9,12 +9,26 @@ public class CS_PlayerController : CS_Controller {
 	private int myJoystickNumber = 1;
 
 	protected override void Init () {
+		CS_GameManager.Instance.SetMyController (this, myJoystickNumber - 1);
+
 		List<CS_PlayerManager.HeroSetup> t_setups = CS_PlayerManager.Instance.GetHeroSetups ();
 		for (int i = 0; i < t_setups.Count; i++) {
-			GameObject f_prefab = CS_PlayerManager.Instance.myHeroBank.GetHeroPrefab (t_setups [i].myHero);
+			//get the heroBankInfo from hero bank using the setup info
+			HeroBankInfo f_heroBankInfo = CS_PlayerManager.Instance.myHeroBank.GetHeroBankInfo (t_setups [i].myHero);
+			//get the prefab the heroBankInfo 
+			GameObject f_prefab = f_heroBankInfo.prefab;
+			//instantiate the prefab
 			GameObject f_heroObject = Instantiate (f_prefab, this.transform);
+			//create an array of skills
+			List<SkillInfo> f_skills = new List<SkillInfo> ();
+			int f_skillCount = t_setups [i].myActiveSkills.Count;
+			for (int j = 0; j < f_skillCount; j++) {
+				f_skills.Add (f_heroBankInfo.skills [t_setups [i].myActiveSkills [j]].GetSkillInfo ());
+			}
+			f_heroObject.GetComponent<CS_Hero> ().SetMySkillInfos (f_skills);
+
 			myHeroBattleInfos.Add (
-				new HeroBattleInfo (f_heroObject.GetComponent<CS_Hero> (), t_setups [i].myHeroPosition)
+				new HeroBattleInfo (f_heroObject.GetComponent<CS_Hero> (), t_setups [i].myHeroPosition, f_skills)
 			);
 		}
 	}

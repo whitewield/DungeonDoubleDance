@@ -7,12 +7,17 @@ public class CS_Controller : MonoBehaviour {
 
 	protected List<HeroBattleInfo> myHeroBattleInfos = new List<HeroBattleInfo> ();
 
+	/// <summary>
+	/// Battle information for a hero.
+	/// </summary>
 	public struct HeroBattleInfo {
 		public CS_Hero myHero;
 		public TeamPosition myHeroPosition;
-		public HeroBattleInfo (CS_Hero g_hero,TeamPosition g_pos) {
+		public List<SkillInfo> mySkillInfos;
+		public HeroBattleInfo (CS_Hero g_hero, TeamPosition g_pos, List<SkillInfo> g_skills) {
 			myHero = g_hero;
 			myHeroPosition = g_pos;
+			mySkillInfos = g_skills;
 		}
 	}
 

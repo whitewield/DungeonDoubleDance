@@ -55,3 +55,4 @@ MonoBehaviour:
   myHeroSetups:
   - myHero: 1
     myHeroPosition: 0
+    myActiveSkills: 000000000100000002000000

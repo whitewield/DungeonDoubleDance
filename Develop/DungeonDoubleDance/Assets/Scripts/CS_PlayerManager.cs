@@ -14,9 +14,11 @@ public class CS_PlayerManager : MonoBehaviour {
 	public struct HeroSetup {
 		public HeroType myHero;
 		public TeamPosition myHeroPosition;
-		public HeroSetup (HeroType g_hero,TeamPosition g_pos) {
+		public List<int> myActiveSkills;
+		public HeroSetup (HeroType g_hero,TeamPosition g_pos, List<int> g_skills) {
 			myHero = g_hero;
 			myHeroPosition = g_pos;
+			myActiveSkills = g_skills;
 		}
 	}
 
