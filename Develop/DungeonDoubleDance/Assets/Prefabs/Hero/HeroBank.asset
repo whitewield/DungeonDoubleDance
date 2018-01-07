@@ -14,13 +14,10 @@ MonoBehaviour:
   Front:
   - heroType: 1
     prefab: {fileID: 1605978821142706, guid: a4db32c6d98b4486c96732fbf6c7645e, type: 2}
-    skills:
-    - {fileID: 11400000, guid: aa7bd512865b7447b8a4d4971a33dda1, type: 2}
-    - {fileID: 11400000, guid: 3c28d04db4193469fa6b596e5f99736e, type: 2}
-    - {fileID: 11400000, guid: abe16c7a1f3124c829aa50062d4167cd, type: 2}
+    skillBank: {fileID: 11400000, guid: 984eefc21301a45759e50071b157f2cc, type: 2}
   Back: []
   Double: []
   emptyInfo:
     heroType: 0
     prefab: {fileID: 0}
-    skills: []
+    skillBank: {fileID: 0}

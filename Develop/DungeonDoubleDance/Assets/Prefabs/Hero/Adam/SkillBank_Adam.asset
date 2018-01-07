@@ -9,7 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9428abad4b7b4304abd724d8683b0c5, type: 3}
-  m_Name: Adam_Move
+  m_Name: SkillBank_Adam
   m_EditorClassIdentifier: 
-  skillName: Move
-  pattern: 00000000010000000200000003000000
+  mySkillInfos:
+  - mySkillName: Attack
+    myPattern: 000000000100000003000000
+  - mySkillName: Defense
+    myPattern: 010000000100000003000000
+  - mySkillName: Move
+    myPattern: 00000000010000000200000003000000

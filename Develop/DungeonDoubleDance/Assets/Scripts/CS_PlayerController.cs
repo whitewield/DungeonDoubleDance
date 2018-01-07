@@ -23,7 +23,7 @@ public class CS_PlayerController : CS_Controller {
 			List<SkillInfo> f_skills = new List<SkillInfo> ();
 			int f_skillCount = t_setups [i].myActiveSkills.Count;
 			for (int j = 0; j < f_skillCount; j++) {
-				f_skills.Add (f_heroBankInfo.skills [t_setups [i].myActiveSkills [j]].GetSkillInfo ());
+				f_skills.Add (f_heroBankInfo.skillBank.GetSkillInfo (t_setups [i].myActiveSkills [j]));
 			}
 			f_heroObject.GetComponent<CS_Hero> ().SetMySkillInfos (f_skills);
 

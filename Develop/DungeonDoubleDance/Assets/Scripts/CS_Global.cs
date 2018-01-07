@@ -36,6 +36,7 @@ namespace Global {
 		Y,
 	}
 
+	[System.Serializable]
 	public struct SkillInfo {
 		public string mySkillName;
 		public Key[] myPattern;

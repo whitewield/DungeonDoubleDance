@@ -38,7 +38,7 @@ public class SO_HeroBank : ScriptableObject {
 	public SkillInfo GetSkillInfo (HeroType g_heroType, int g_index) {
 		HeroBankInfo t_heroInfo = GetHeroBankInfo (g_heroType);
 
-		return t_heroInfo.skills [g_index].GetSkillInfo ();
+		return t_heroInfo.skillBank.GetSkillInfo (g_index);
 	}
 
 	public HeroBankInfo GetHeroBankInfo (HeroType g_heroType) {
@@ -65,5 +65,5 @@ public class SO_HeroBank : ScriptableObject {
 public struct HeroBankInfo {
 	public HeroType heroType;
 	public GameObject prefab;
-	public SO_SkillInfo[] skills;
+	public SO_SkillBank skillBank;
 }
