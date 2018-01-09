@@ -4,9 +4,11 @@ using UnityEngine;
 using Global;
 
 public class CS_Hero : MonoBehaviour {
-	protected List<Key> myKeyRecordList = new List<Key> ();
 	protected Animator myAnimator;
 	protected List<SkillInfo> mySkillInfoList;
+
+
+	protected List<Key> myKeyRecordList = new List<Key> ();
 	protected List<SkillInfo> myPossibleSkillInfoList = new List<SkillInfo> ();
 	void Awake () {
 		myAnimator = this.GetComponent<Animator> ();

@@ -10,8 +10,8 @@ public class CS_GameManager : MonoBehaviour {
 
 
 	private CS_Controller[] myControllers = new CS_Controller[(int)BattlefieldSide.End];
-	[SerializeField] Transform[] myPositions_Left;
-	[SerializeField] Transform[] myPositions_Right;
+	[SerializeField] float[] myPositions_X;
+	[SerializeField] float myPositions_Y;
 
 	void Awake () {
 		if (instance != null && instance != this) {
@@ -41,5 +41,30 @@ public class CS_GameManager : MonoBehaviour {
 
 	public CS_Controller GetOpponentController (CS_Controller g_controller) {
 		return myControllers [1 - System.Array.IndexOf (myControllers, g_controller)];
+	}
+
+	public Vector3 GetPosition (BattlefieldSide g_side, TeamPosition g_teamPos) {
+		Vector3 t_pos = new Vector3 (0, myPositions_Y, 0);
+		switch (g_teamPos) {
+		case TeamPosition.Front:
+			t_pos.x = myPositions_X [0];
+			break;
+		case TeamPosition.Back:
+			t_pos.x = myPositions_X [1];
+			break;
+		case TeamPosition.All:
+			t_pos.x = (myPositions_X [0] + myPositions_X [1]) * 0.5f;
+			break;
+		}
+
+		switch (g_side) {
+		case BattlefieldSide.Left:
+			t_pos.x *= -1;
+			break;
+		case BattlefieldSide.Right:
+			break;
+		}
+
+		return t_pos;
 	}
 }

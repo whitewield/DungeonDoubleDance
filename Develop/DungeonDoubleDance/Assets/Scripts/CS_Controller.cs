@@ -7,6 +7,8 @@ public class CS_Controller : MonoBehaviour {
 
 	protected List<HeroBattleInfo> myHeroBattleInfos = new List<HeroBattleInfo> ();
 
+	protected BattlefieldSide myBattlefieldSide;
+
 	/// <summary>
 	/// Battle information for a hero.
 	/// </summary>

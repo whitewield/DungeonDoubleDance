@@ -9,7 +9,8 @@ public class CS_PlayerController : CS_Controller {
 	private int myJoystickNumber = 1;
 
 	protected override void Init () {
-		CS_GameManager.Instance.SetMyController (this, myJoystickNumber - 1);
+		myBattlefieldSide = (BattlefieldSide)(myJoystickNumber - 1);
+		CS_GameManager.Instance.SetMyController (this, myBattlefieldSide);
 
 		List<CS_PlayerManager.HeroSetup> t_setups = CS_PlayerManager.Instance.GetHeroSetups ();
 		for (int i = 0; i < t_setups.Count; i++) {
@@ -17,6 +18,9 @@ public class CS_PlayerController : CS_Controller {
 			HeroBankInfo f_heroBankInfo = CS_PlayerManager.Instance.myHeroBank.GetHeroBankInfo (t_setups [i].myHero);
 			//get the prefab the heroBankInfo 
 			GameObject f_prefab = f_heroBankInfo.prefab;
+			// if the prefab doesn't exist, try the next one
+			if (f_prefab == null)
+				continue;
 			//instantiate the prefab
 			GameObject f_heroObject = Instantiate (f_prefab, this.transform);
 			//create an array of skills
@@ -30,6 +34,11 @@ public class CS_PlayerController : CS_Controller {
 			myHeroBattleInfos.Add (
 				new HeroBattleInfo (f_heroObject.GetComponent<CS_Hero> (), t_setups [i].myHeroPosition, f_skills)
 			);
+
+
+			//move the hero gameObject
+			myHeroBattleInfos [i].myHero.gameObject.transform.position = 
+				CS_GameManager.Instance.GetPosition (myBattlefieldSide, myHeroBattleInfos [i].myHeroPosition);
 		}
 	}
 
