@@ -35,6 +35,15 @@ public class SO_HeroBank : ScriptableObject {
 		return t_heroInfo.prefab;
 	}
 
+	public int GetHeroMaxHP (HeroType g_heroType) {
+		HeroBankInfo t_heroInfo = GetHeroBankInfo (g_heroType);
+
+		if (t_heroInfo.heroType == emptyInfo.heroType)
+			return -1;
+
+		return t_heroInfo.maxHP;
+	}
+
 	public SkillInfo GetSkillInfo (HeroType g_heroType, int g_index) {
 		HeroBankInfo t_heroInfo = GetHeroBankInfo (g_heroType);
 
@@ -64,6 +73,7 @@ public class SO_HeroBank : ScriptableObject {
 [System.Serializable]
 public struct HeroBankInfo {
 	public HeroType heroType;
+	public int maxHP;
 	public GameObject prefab;
 	public SO_SkillBank skillBank;
 }

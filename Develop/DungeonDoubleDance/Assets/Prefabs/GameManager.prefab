@@ -53,5 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPositions_X:
   - 3
-  - 7
-  myPositions_Y: 0
+  - 6
+  myPositions_Y: -2

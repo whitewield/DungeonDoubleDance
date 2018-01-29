@@ -29,7 +29,9 @@ public class CS_PlayerController : CS_Controller {
 			for (int j = 0; j < f_skillCount; j++) {
 				f_skills.Add (f_heroBankInfo.skillBank.GetSkillInfo (t_setups [i].myActiveSkills [j]));
 			}
-			f_heroObject.GetComponent<CS_Hero> ().SetMySkillInfos (f_skills);
+
+			//init CS_Hero
+			f_heroObject.GetComponent<CS_Hero> ().Init (this, f_heroBankInfo.maxHP, f_skills);
 
 			myHeroBattleInfos.Add (
 				new HeroBattleInfo (f_heroObject.GetComponent<CS_Hero> (), t_setups [i].myHeroPosition, f_skills)
