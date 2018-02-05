@@ -41,6 +41,13 @@ public class CS_Hero : MonoBehaviour {
 	public virtual HeroProcess GetMyProcess () {
 		return myProcess;
 	}
+
+	public void ActionDone () {
+		if (myProcess == HeroProcess.Dead)
+			return;
+		
+		myProcess = HeroProcess.Idle;
+	}
 		
 	public virtual void TakeDamage (int g_damage) {
 		myCurrentHP -= g_damage;
@@ -52,11 +59,15 @@ public class CS_Hero : MonoBehaviour {
 //		ShowHP ();
 	}
 
-	protected virtual void Action (string g_skillName) {
+	protected virtual void Action (SkillType g_skillType) {
 		
 	}
 
 	public virtual void OnKey (Key g_key) {
+		if (myProcess != HeroProcess.Idle) {
+			return;
+		}
+
 		myAnimator.SetTrigger (g_key.ToString ());
 		//add a function to change recorded keys
 
@@ -102,7 +113,7 @@ public class CS_Hero : MonoBehaviour {
 		if (t_actionIndex != -1) {
 			//TODO: take action
 			Debug.Log (mySkillInfoList [t_actionIndex].mySkillName);
-			Action (mySkillInfoList [t_actionIndex].mySkillName);
+			Action (mySkillInfoList [t_actionIndex].mySkillType);
 			//action done
 			myKeyRecordList.Clear ();
 		} else {
@@ -117,10 +128,22 @@ public class CS_Hero : MonoBehaviour {
 		Debug.Log (t_debug);
 	}
 
-	protected CheckSubPatternResult CheckSubPattern (List<Key> g_checkList, Key[] g_pattern) {
+	protected int GetSkillDamage (SkillType g_skillType) {
+		foreach (SkillInfo f_skillInfo in mySkillInfoList) {
+			if (g_skillType == f_skillInfo.mySkillType)
+				return f_skillInfo.myDamage;
+		}
+
+		Debug.LogError (g_skillType.ToString () + " damage not found!");
+		return 0;
+	}
+
+	protected CheckSubPatternResult CheckSubPattern (List<Key> g_checkList, string g_pattern) {
 		if (g_checkList.Count <= g_pattern.Length) {
 			for (int j = 0; j < g_checkList.Count; j++) {
-				if (g_pattern [j] != g_checkList [j]) {
+//				Debug.Log (g_pattern [j] + " " + (Key)(g_pattern [j]) + " " + g_checkList [j]);
+
+				if ((Key)System.Enum.Parse(typeof(Key), g_pattern [j].ToString()) != g_checkList [j]) {
 					return CheckSubPatternResult.Fail;
 				}
 				if (j + 1 == g_pattern.Length) {

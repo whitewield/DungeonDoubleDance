@@ -48,6 +48,37 @@ public class CS_Controller : MonoBehaviour {
 		
 	}
 
+	protected void Init_Heros (List<CS_PlayerManager.HeroSetup> g_HeroSetups) {
+		for (int i = 0; i < g_HeroSetups.Count; i++) {
+			//get the heroBankInfo from hero bank using the setup info
+			HeroBankInfo f_heroBankInfo = CS_PlayerManager.Instance.myHeroBank.GetHeroBankInfo (g_HeroSetups [i].myHero);
+			//get the prefab the heroBankInfo 
+			GameObject f_prefab = f_heroBankInfo.prefab;
+			// if the prefab doesn't exist, try the next one
+			if (f_prefab == null)
+				continue;
+			//instantiate the prefab
+			GameObject f_heroObject = Instantiate (f_prefab, this.transform);
+			//create an array of skills
+			List<SkillInfo> f_skills = new List<SkillInfo> ();
+			int f_skillCount = g_HeroSetups [i].myActiveSkills.Count;
+			for (int j = 0; j < f_skillCount; j++) {
+				f_skills.Add (f_heroBankInfo.skillBank.GetSkillInfo (g_HeroSetups [i].myActiveSkills [j]));
+			}
+
+			//init CS_Hero
+			f_heroObject.GetComponent<CS_Hero> ().Init (this, f_heroBankInfo.maxHP, f_skills);
+
+			myHeroBattleInfos.Add (
+				new HeroBattleInfo (f_heroObject.GetComponent<CS_Hero> (), g_HeroSetups [i].myHeroPosition, f_skills)
+			);
+
+			//move the hero gameObject
+			myHeroBattleInfos [i].myHero.gameObject.transform.position = 
+				CS_GameManager.Instance.GetPosition (myBattlefieldSide, myHeroBattleInfos [i].myHeroPosition);
+		}
+	}
+
 	protected void OnKey (Key g_key) {
 		for (int i = 0; i < myHeroBattleInfos.Count; i++) {
 			myHeroBattleInfos [i].myHero.OnKey (g_key);

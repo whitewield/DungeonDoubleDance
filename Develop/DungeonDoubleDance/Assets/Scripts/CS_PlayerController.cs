@@ -12,41 +12,16 @@ public class CS_PlayerController : CS_Controller {
 		myBattlefieldSide = (BattlefieldSide)(myJoystickNumber - 1);
 		CS_GameManager.Instance.SetMyController (this, myBattlefieldSide);
 
-		List<CS_PlayerManager.HeroSetup> t_setups = CS_PlayerManager.Instance.GetHeroSetups ();
-		for (int i = 0; i < t_setups.Count; i++) {
-			//get the heroBankInfo from hero bank using the setup info
-			HeroBankInfo f_heroBankInfo = CS_PlayerManager.Instance.myHeroBank.GetHeroBankInfo (t_setups [i].myHero);
-			//get the prefab the heroBankInfo 
-			GameObject f_prefab = f_heroBankInfo.prefab;
-			// if the prefab doesn't exist, try the next one
-			if (f_prefab == null)
-				continue;
-			//instantiate the prefab
-			GameObject f_heroObject = Instantiate (f_prefab, this.transform);
-			//create an array of skills
-			List<SkillInfo> f_skills = new List<SkillInfo> ();
-			int f_skillCount = t_setups [i].myActiveSkills.Count;
-			for (int j = 0; j < f_skillCount; j++) {
-				f_skills.Add (f_heroBankInfo.skillBank.GetSkillInfo (t_setups [i].myActiveSkills [j]));
-			}
-
-			//init CS_Hero
-			f_heroObject.GetComponent<CS_Hero> ().Init (this, f_heroBankInfo.maxHP, f_skills);
-
-			myHeroBattleInfos.Add (
-				new HeroBattleInfo (f_heroObject.GetComponent<CS_Hero> (), t_setups [i].myHeroPosition, f_skills)
-			);
-
-
-			//move the hero gameObject
-			myHeroBattleInfos [i].myHero.gameObject.transform.position = 
-				CS_GameManager.Instance.GetPosition (myBattlefieldSide, myHeroBattleInfos [i].myHeroPosition);
-		}
+		Init_Heros (CS_PlayerManager.Instance.GetHeroSetups ());
 	}
 
 	protected override void Update () {
 		base.Update ();
 
+		Update_Input ();
+	}
+
+	protected void Update_Input () {
 		if (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myJoystickNumber, JoystickButton.A)) {
 			OnKey (Key.A);
 		}

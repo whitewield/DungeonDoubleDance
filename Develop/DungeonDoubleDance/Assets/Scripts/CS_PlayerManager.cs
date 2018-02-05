@@ -23,6 +23,7 @@ public class CS_PlayerManager : MonoBehaviour {
 	}
 
 	[SerializeField] List<HeroSetup> myHeroSetups;
+	[SerializeField] List<HeroSetup> myBossSetups;
 
 	void Awake () {
 		if (instance != null && instance != this) {
@@ -35,6 +36,10 @@ public class CS_PlayerManager : MonoBehaviour {
 
 	public List<HeroSetup> GetHeroSetups () {
 		return myHeroSetups;
+	}
+
+	public List<HeroSetup> GetBossSetups () {
+		return myBossSetups;
 	}
 
 //	// Use this for initialization

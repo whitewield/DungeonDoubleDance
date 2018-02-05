@@ -9,21 +9,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9428abad4b7b4304abd724d8683b0c5, type: 3}
-  m_Name: SkillBank_Adam
+  m_Name: SkillBank_Basilisk
   m_EditorClassIdentifier: 
   mySkillInfos:
-  - mySkillName: Skewer Slash
-    mySkillType: 101
-    myDamage: 200
-    myCoolDown: 0
-    myPattern: AABY
-  - mySkillName: Fireball
-    mySkillType: 102
-    myDamage: 100
-    myCoolDown: 0
-    myPattern: ABXY
-  - mySkillName: Fire Strike
-    mySkillType: 103
-    myDamage: 100
-    myCoolDown: 0
-    myPattern: BXXY
+  - mySkillName: Devour
+    mySkillType: 10101
+    myDamage: 50
+    myCoolDown: 8
+    myPattern: ABABABY
+  - mySkillName: Fang Strike
+    mySkillType: 10102
+    myDamage: 50
+    myCoolDown: 8
+    myPattern: AAABABY
+  - mySkillName: Serpent Acid
+    mySkillType: 10103
+    myDamage: 50
+    myCoolDown: 8
+    myPattern: XAXBXXY
