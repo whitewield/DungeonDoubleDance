@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1893871207446244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4802245513678744}
@@ -188,6 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b609ec571364e2e90d40ace6116d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myStatsDisplayPrefab: {fileID: 1271937373677900, guid: 5e5a4b872ae234a849ef3069c0c48dd4,
+    type: 2}
 --- !u!212 &212101798432058182
 SpriteRenderer:
   m_ObjectHideFlags: 1
