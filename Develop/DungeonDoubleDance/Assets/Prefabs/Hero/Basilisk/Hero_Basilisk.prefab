@@ -70,6 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f69ba520b5a435782e126ba18bce60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myStatsDisplayPrefab: {fileID: 1271937373677900, guid: 5e5a4b872ae234a849ef3069c0c48dd4,
+    type: 2}
 --- !u!212 &212395377101455492
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -62,7 +62,7 @@ public class CS_Hero : MonoBehaviour {
 			myCurrentHP = 0;
 		}
 
-		myStatsDisplay.SetHealth (myCurrentHP / myMaxHP);
+		myStatsDisplay.SetHealth ((float)myCurrentHP / (float)myMaxHP);
 //		ShowHP ();
 	}
 
