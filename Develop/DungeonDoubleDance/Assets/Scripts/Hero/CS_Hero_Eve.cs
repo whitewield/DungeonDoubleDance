@@ -17,4 +17,19 @@ public class CS_Hero_Eve : CS_Hero {
 			break;
 		}
 	}
+
+	public void Block () {
+		Debug.Log ("Block");
+
+	}
+
+	public void MagicalShield () {
+		Debug.Log ("MagicalShield");
+
+	}
+
+	public void Move () {
+		Debug.Log ("Move");
+
+	}
 }

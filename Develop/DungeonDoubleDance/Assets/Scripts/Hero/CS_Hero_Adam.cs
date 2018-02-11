@@ -35,4 +35,9 @@ public class CS_Hero_Adam : CS_Hero {
 			GetSkillDamage (SkillType.ADM_Fireball)
 		);
 	}
+
+	public void FireStrike () {
+		Debug.Log ("FireStrike");
+
+	}
 }

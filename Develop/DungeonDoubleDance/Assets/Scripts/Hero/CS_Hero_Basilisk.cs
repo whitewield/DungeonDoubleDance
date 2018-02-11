@@ -17,4 +17,19 @@ public class CS_Hero_Basilisk : CS_Hero {
 //			break;
 		}
 	}
+
+	public void Devour () {
+		Debug.Log ("Devour");
+
+	}
+
+	public void FangStrike () {
+		Debug.Log ("FangStrike");
+
+	}
+
+	public void SerpentAcid () {
+		Debug.Log ("SerpentAcid");
+
+	}
 }
