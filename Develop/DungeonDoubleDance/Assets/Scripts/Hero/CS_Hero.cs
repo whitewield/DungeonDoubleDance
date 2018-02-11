@@ -16,8 +16,14 @@ public class CS_Hero : MonoBehaviour {
 	protected int myCurrentHP;
 	protected HeroProcess myProcess;
 
+	[SerializeField] GameObject myStatsDisplayPrefab;
+	protected CS_HeroStatsDisplay myStatsDisplay;
+
 	void Awake () {
 		myAnimator = this.GetComponent<Animator> ();
+
+		myStatsDisplay = Instantiate (myStatsDisplayPrefab, this.transform).GetComponent<CS_HeroStatsDisplay> ();
+		myStatsDisplay.transform.localPosition = Vector3.zero;
 	}
 
 	public virtual void Init (CS_Controller g_controller, int g_HP, List<SkillInfo> g_skillInfos) {
@@ -56,6 +62,7 @@ public class CS_Hero : MonoBehaviour {
 			myCurrentHP = 0;
 		}
 
+		myStatsDisplay.SetHealth (myCurrentHP / myMaxHP);
 //		ShowHP ();
 	}
 
