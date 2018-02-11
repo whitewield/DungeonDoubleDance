@@ -7,7 +7,7 @@ using JellyJoystick;
 public class CS_BossController : CS_Controller {
 	[TextArea(3,10)]
 	[SerializeField] string myKeySheet;
-	[SerializeField] char[] myKeySheetArray;
+	private char[] myKeySheetArray;
 	private int myKeySheetArray_Index = 0;
 
 	private float myTimer = 4;
