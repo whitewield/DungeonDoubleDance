@@ -32,6 +32,8 @@ public class CS_Hero : MonoBehaviour {
 		mySkillInfoList = g_skillInfos;
 		myMaxHP = g_HP;
 		myCurrentHP = g_HP;
+
+		myStatsDisplay.InitSkillPattern (g_skillInfos);
 	}
 
 	// Use this for initialization

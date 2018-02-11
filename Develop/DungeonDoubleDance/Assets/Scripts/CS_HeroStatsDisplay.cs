@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Global;
 
 public class CS_HeroStatsDisplay : MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class CS_HeroStatsDisplay : MonoBehaviour {
 
 	[SerializeField] RectTransform mySkillListRectTransform;
 	[SerializeField] GameObject mySkillPrefab;
+	[SerializeField] float mySkill_IntervalY;
+	private List<CS_HeroStatsDisplay_Skill> mySkillList;
 
 
 	// Use this for initialization
@@ -24,8 +27,14 @@ public class CS_HeroStatsDisplay : MonoBehaviour {
 //		
 //	}
 
-	public void InitSkillPattern () {
-		
+	public void InitSkillPattern (List<SkillInfo> g_skillInfos) {
+		for (int i = 0; i < g_skillInfos.Count; i++) {
+			CS_HeroStatsDisplay_Skill t_skill = 
+				Instantiate (mySkillPrefab, mySkillListRectTransform).GetComponent<CS_HeroStatsDisplay_Skill> ();
+			t_skill.GetComponent<RectTransform> ().anchoredPosition = new Vector3 (0, mySkill_IntervalY * i);
+
+			t_skill.ShowText (g_skillInfos [i].mySkillName + ": " + g_skillInfos [i].myPattern);
+		}
 	}
 
 	public void SetHealth (float g_percent) {
