@@ -79,6 +79,10 @@ public class CS_Hero : MonoBehaviour {
 		
 	}
 
+	public virtual void ClearKeyRecord () {
+		myKeyRecordList.Clear ();
+	}
+
 	public virtual void OnKey (Key g_key) {
 		if (myProcess != HeroProcess.Idle) {
 			return;

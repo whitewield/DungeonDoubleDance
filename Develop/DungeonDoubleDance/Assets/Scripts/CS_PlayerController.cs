@@ -37,6 +37,7 @@ public class CS_PlayerController : CS_Controller {
 		if (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myJoystickNumber, JoystickButton.Y)) {
 			OnKey (Key.Y);
 		}
+
 	}
 
 }

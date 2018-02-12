@@ -80,8 +80,14 @@ public class CS_Controller : MonoBehaviour {
 	}
 
 	protected void OnKey (Key g_key) {
-		for (int i = 0; i < myHeroBattleInfos.Count; i++) {
-			myHeroBattleInfos [i].myHero.OnKey (g_key);
+		if (HitBeat () == true)
+			for (int i = 0; i < myHeroBattleInfos.Count; i++) {
+				myHeroBattleInfos [i].myHero.OnKey (g_key);
+			}
+		else {
+			for (int i = 0; i < myHeroBattleInfos.Count; i++) {
+				myHeroBattleInfos [i].myHero.ClearKeyRecord ();
+			}
 		}
 	}
 
@@ -157,4 +163,27 @@ public class CS_Controller : MonoBehaviour {
 			t_targetHeros [i].TakeDamage (g_damage);
 		}
 	}
+
+	#region Beats
+	private bool myBeat;
+
+	public virtual void Beat_Enter () {
+		myBeat = true;
+	}
+
+	public virtual void Beat_Center () {
+	}
+
+	public virtual void Beat_Exit () {
+		myBeat = false;
+	}
+		
+	public virtual bool HitBeat () {
+		if (myBeat == false)
+			return false;
+
+		myBeat = false;
+		return true;
+	}
+	#endregion
 }
