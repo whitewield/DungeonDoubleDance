@@ -67,4 +67,24 @@ public class CS_GameManager : MonoBehaviour {
 
 		return t_pos;
 	}
+
+	#region Beats
+	public virtual void Beat_Enter () {
+		foreach (CS_Controller f_controller in myControllers) {
+			f_controller.Beat_Enter ();
+		}
+	}
+
+	public virtual void Beat_Center () {
+		foreach (CS_Controller f_controller in myControllers) {
+			f_controller.Beat_Center ();
+		}
+	}
+
+	public virtual void Beat_Exit () {
+		foreach (CS_Controller f_controller in myControllers) {
+			f_controller.Beat_Exit ();
+		}
+	}
+	#endregion
 }
