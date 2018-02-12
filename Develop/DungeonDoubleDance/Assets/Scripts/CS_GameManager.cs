@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Global;
+using JellyJoystick;
 
 public class CS_GameManager : MonoBehaviour {
 
@@ -28,7 +29,9 @@ public class CS_GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, 0, JoystickButton.START)) {
+			UnityEngine.SceneManagement.SceneManager.LoadScene ("Game");
+		}
 	}
 
 	public void SetMyController (CS_Controller g_controller, BattlefieldSide g_side) {
@@ -67,4 +70,24 @@ public class CS_GameManager : MonoBehaviour {
 
 		return t_pos;
 	}
+
+	#region Beats
+	public virtual void Beat_Enter () {
+		foreach (CS_Controller f_controller in myControllers) {
+			f_controller.Beat_Enter ();
+		}
+	}
+
+	public virtual void Beat_Center () {
+		foreach (CS_Controller f_controller in myControllers) {
+			f_controller.Beat_Center ();
+		}
+	}
+
+	public virtual void Beat_Exit () {
+		foreach (CS_Controller f_controller in myControllers) {
+			f_controller.Beat_Exit ();
+		}
+	}
+	#endregion
 }
