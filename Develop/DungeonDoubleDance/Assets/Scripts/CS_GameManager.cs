@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Global;
+using JellyJoystick;
 
 public class CS_GameManager : MonoBehaviour {
 
@@ -28,7 +29,9 @@ public class CS_GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, 0, JoystickButton.START)) {
+			UnityEngine.SceneManagement.SceneManager.LoadScene ("Game");
+		}
 	}
 
 	public void SetMyController (CS_Controller g_controller, BattlefieldSide g_side) {

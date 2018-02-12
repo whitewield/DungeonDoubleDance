@@ -61,6 +61,8 @@ MonoBehaviour:
       myKeyCode: 102
     - myJoystickButton: 2
       myKeyCode: 106
+    - myJoystickButton: 7
+      myKeyCode: 32
     - myJoystickButton: 3
       myKeyCode: 107
     myAxes:

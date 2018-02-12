@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CS_RhythmManager : MonoBehaviour {
 
@@ -22,6 +23,11 @@ public class CS_RhythmManager : MonoBehaviour {
 	private float myTimer;
 	private BeatProcess myBeatProcess;
 
+	[SerializeField] Image myBeatDisplay;
+	[SerializeField] Color myBeatDisplay_Color_On = Color.white;
+	[SerializeField] Color myBeatDisplay_Color_Off = Color.black;
+
+	private AudioSource myBeatAudioSource;
 
 	void Awake () {
 		myBeatTime = 60.0f / myBPM;
@@ -32,6 +38,8 @@ public class CS_RhythmManager : MonoBehaviour {
 
 		myTimer = -myHalfBeatTime;
 		myBeatProcess = BeatProcess.Fore_Off;
+
+		myBeatAudioSource = this.GetComponent<AudioSource> ();
 	}
 
 //	// Use this for initialization
@@ -42,6 +50,8 @@ public class CS_RhythmManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		myTimer += Time.deltaTime;
+
+		Update_Display ();
 
 		if (myBeatProcess == BeatProcess.Fore_Off && myTimer > -myOnBeatTime) {
 			//enter the beat
@@ -54,6 +64,8 @@ public class CS_RhythmManager : MonoBehaviour {
 
 			CS_GameManager.Instance.Beat_Center ();
 			myBeatProcess = BeatProcess.Back_On;
+
+			myBeatAudioSource.Play ();
 			
 		} else if (myBeatProcess == BeatProcess.Back_On && myTimer > myOnBeatTime) {
 			//exit the beat
@@ -67,6 +79,17 @@ public class CS_RhythmManager : MonoBehaviour {
 			myBeatProcess = BeatProcess.Fore_Off;
 			myTimer -= myBeatTime;
 		}
+	}
+
+	void Update_Display () {
+		float t_process = Mathf.Abs (myTimer);
+		if (t_process > myOnBeatTime) {
+			myBeatDisplay.color = myBeatDisplay_Color_Off;
+			return;
+		}
+
+		t_process = t_process / myOnBeatTime;
+		myBeatDisplay.color = (1 - t_process) * myBeatDisplay_Color_On + t_process * myBeatDisplay_Color_Off;
 	}
 
 
