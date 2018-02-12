@@ -6,16 +6,9 @@ using Global;
 public class CS_Hero_Adam : CS_Hero {
 	protected override void Action (SkillType g_skillType) {
 		switch (g_skillType) {
-		case SkillType.ADM_SkewerSlash:
+		default:
 			myProcess = HeroProcess.Action;
-			myAnimator.SetTrigger (SkillType.ADM_SkewerSlash.ToString ());
-			break;
-		case SkillType.ADM_Fireball:
-			myProcess = HeroProcess.Action;
-			myAnimator.SetTrigger (SkillType.ADM_Fireball.ToString ());
-			break;
-		case SkillType.ADM_FireStrike:
-			myController.Move ();
+			myAnimator.SetTrigger (g_skillType.ToString ());
 			break;
 		}
 	}
@@ -38,6 +31,9 @@ public class CS_Hero_Adam : CS_Hero {
 
 	public void FireStrike () {
 		Debug.Log ("FireStrike");
-
+		CS_GameManager.Instance.GetOpponentController (myController).TakeDamage (
+			Global.TeamPosition.All, 
+			GetSkillDamage (SkillType.ADM_FireStrike)
+		);
 	}
 }

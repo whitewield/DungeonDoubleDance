@@ -14,7 +14,7 @@ MonoBehaviour:
   mySkillInfos:
   - mySkillName: Skewer Slash
     mySkillType: 101
-    myDamage: 200
+    myDamage: 100
     myCoolDown: 0
     myPattern: AABY
   - mySkillName: Fireball

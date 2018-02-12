@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CS_RhythmManager : MonoBehaviour {
-
+	[SerializeField] int BPM = 120;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,4 +13,6 @@ public class CS_RhythmManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+
 }

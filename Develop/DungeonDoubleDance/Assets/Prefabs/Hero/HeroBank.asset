@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Name: HeroBank
   m_EditorClassIdentifier: 
   Front:
-  - heroType: 1
-    maxHP: 100
-    prefab: {fileID: 1605978821142706, guid: a4db32c6d98b4486c96732fbf6c7645e, type: 2}
-    skillBank: {fileID: 11400000, guid: 984eefc21301a45759e50071b157f2cc, type: 2}
   - heroType: 2
-    maxHP: 200
+    maxHP: 400
     prefab: {fileID: 1605978821142706, guid: e87c07f02445c4a7b80deb3e0096e545, type: 2}
     skillBank: {fileID: 11400000, guid: 9120010d3673344b3982889390dfd66b, type: 2}
-  Back: []
+  Back:
+  - heroType: 1
+    maxHP: 200
+    prefab: {fileID: 1605978821142706, guid: a4db32c6d98b4486c96732fbf6c7645e, type: 2}
+    skillBank: {fileID: 11400000, guid: 984eefc21301a45759e50071b157f2cc, type: 2}
   Double:
   - heroType: 3
     maxHP: 1000
