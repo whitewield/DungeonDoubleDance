@@ -19,7 +19,7 @@ MonoBehaviour:
     myPattern: ABBX
   - mySkillName: Magical Shield
     mySkillType: 202
-    myDamage: 100
+    myDamage: 0
     myCoolDown: 0
     myPattern: AABX
   - mySkillName: Move

@@ -32,6 +32,8 @@ public class CS_Hero : MonoBehaviour {
 		mySkillInfoList = g_skillInfos;
 		myMaxHP = g_HP;
 		myCurrentHP = g_HP;
+
+		myStatsDisplay.InitSkillPattern (g_skillInfos);
 	}
 
 	// Use this for initialization
@@ -48,7 +50,7 @@ public class CS_Hero : MonoBehaviour {
 		return myProcess;
 	}
 
-	public void ActionDone () {
+	public virtual void ActionDone () {
 		if (myProcess == HeroProcess.Dead)
 			return;
 		
@@ -56,7 +58,14 @@ public class CS_Hero : MonoBehaviour {
 	}
 		
 	public virtual void TakeDamage (int g_damage) {
-		myCurrentHP -= g_damage;
+		CS_Status[] t_statusArray = this.GetComponents<CS_Status> ();
+
+		float t_damageTakenMultiplier = 1;
+		foreach (CS_Status f_status in t_statusArray) {
+			t_damageTakenMultiplier *= f_status.DamageTakenMultiplier ();
+		}
+
+		myCurrentHP -= Mathf.FloorToInt (g_damage * t_damageTakenMultiplier);
 		if (myCurrentHP <= 0) {
 			myProcess = HeroProcess.Dead;
 			myCurrentHP = 0;

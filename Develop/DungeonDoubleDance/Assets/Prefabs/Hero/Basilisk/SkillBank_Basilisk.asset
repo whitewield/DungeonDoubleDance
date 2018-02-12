@@ -14,12 +14,12 @@ MonoBehaviour:
   mySkillInfos:
   - mySkillName: Devour
     mySkillType: 10101
-    myDamage: 50
+    myDamage: 100
     myCoolDown: 8
     myPattern: ABABABY
   - mySkillName: Fang Strike
     mySkillType: 10102
-    myDamage: 50
+    myDamage: 100
     myCoolDown: 8
     myPattern: AAABABY
   - mySkillName: Serpent Acid

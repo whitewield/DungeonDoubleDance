@@ -58,7 +58,7 @@ MonoBehaviour:
     myActiveSkills: 000000000100000002000000
   - myHero: 2
     myHeroPosition: 0
-    myActiveSkills: 02000000
+    myActiveSkills: 000000000100000002000000
   myBossSetups:
   - myHero: 3
     myHeroPosition: 2
