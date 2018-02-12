@@ -99,33 +99,62 @@ public class CS_Controller : MonoBehaviour {
 		}
 	}
 
-	public void TakeDamage (TeamPosition g_teamPos, int g_damage) {
+	public List<CS_Hero> GetTargets (TeamPosition g_targetPos) {
+		List<CS_Hero> t_targetHeros = new List<CS_Hero> ();
 
 		//if the hero takes up all position, they will have to take damage
 		CS_Hero f_hero = GetHero (TeamPosition.All);
 		if (f_hero != null)
-			f_hero.TakeDamage (g_damage);
-		if (g_teamPos == TeamPosition.All) {
+			t_targetHeros.Add (f_hero);
+		if (g_targetPos == TeamPosition.All) {
 			//all positions take damage
 			f_hero = GetHero (TeamPosition.Front);
 			if (f_hero != null)
-				f_hero.TakeDamage (g_damage);
+				t_targetHeros.Add (f_hero);
 
 			f_hero = GetHero (TeamPosition.Back);
 			if (f_hero != null)
-				f_hero.TakeDamage (g_damage);
+				t_targetHeros.Add (f_hero);
 		} else {
 			//the target position take damage
-			f_hero = GetHero (g_teamPos);
+			f_hero = GetHero (g_targetPos);
 			if (f_hero != null)
-				f_hero.TakeDamage (g_damage);
+				t_targetHeros.Add (f_hero);
 			else {
 				//if the target position is empty, the other position take damage
-				f_hero = GetHero (Constants.GetOtherPosition (g_teamPos));
+				f_hero = GetHero (Constants.GetOtherPosition (g_targetPos));
 				if (f_hero != null)
-					f_hero.TakeDamage (g_damage);
+					t_targetHeros.Add (f_hero);
 			}
 		}
 
+		return t_targetHeros;
+	}
+
+	public void RemoveStatus<T> (TeamPosition g_targetPos) where T : CS_Status {
+		List<CS_Hero> t_targetHeros = GetTargets (g_targetPos);
+
+		for (int i = 0; i < t_targetHeros.Count; i++) {
+			T f_status = t_targetHeros [i].GetComponent<T> ();
+			if (f_status != null) {
+				Destroy (f_status);
+			}
+		}
+	}
+
+	public void ApplyStatus<T> (TeamPosition g_targetPos) where T : CS_Status {
+		List<CS_Hero> t_targetHeros = GetTargets (g_targetPos);
+
+		for (int i = 0; i < t_targetHeros.Count; i++) {
+			t_targetHeros [i].gameObject.AddComponent<T> ();
+		}
+	}
+
+	public void TakeDamage (TeamPosition g_targetPos, int g_damage) {
+		List<CS_Hero> t_targetHeros = GetTargets (g_targetPos);
+
+		for (int i = 0; i < t_targetHeros.Count; i++) {
+			t_targetHeros [i].TakeDamage (g_damage);
+		}
 	}
 }
