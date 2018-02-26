@@ -51,6 +51,8 @@ public class CS_Hero : MonoBehaviour {
 	}
 
 	public virtual void ActionDone () {
+		ClearKeyRecord ();
+
 		if (myProcess == HeroProcess.Dead)
 			return;
 		
@@ -81,6 +83,9 @@ public class CS_Hero : MonoBehaviour {
 
 	public virtual void ClearKeyRecord () {
 		myKeyRecordList.Clear ();
+		for (int i = 0; i < mySkillInfoList.Count; i++) {
+			myStatsDisplay.HighlightSkillPattern (i, 0);
+		}
 	}
 
 	public virtual void OnKey (Key g_key) {
@@ -120,6 +125,8 @@ public class CS_Hero : MonoBehaviour {
 				f_firstInUse++;
 			}
 
+			myStatsDisplay.HighlightSkillPattern (i, t_keyRecord.Count);
+
 			//if the recorded keys are matched with one ability, don't need to check anymore
 			if (t_actionIndex != -1)
 				break;
@@ -135,7 +142,7 @@ public class CS_Hero : MonoBehaviour {
 			Debug.Log (mySkillInfoList [t_actionIndex].mySkillName);
 			Action (mySkillInfoList [t_actionIndex].mySkillType);
 			//action done
-			myKeyRecordList.Clear ();
+//			myKeyRecordList.Clear ();
 		} else {
 			myKeyRecordList.RemoveRange (0, t_firstInUse);
 		}

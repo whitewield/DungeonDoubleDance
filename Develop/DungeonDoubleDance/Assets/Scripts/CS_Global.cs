@@ -79,6 +79,10 @@ namespace Global {
 	public class Constants {
 
 		public const int LERP_SPEED_MOVE = 10;
+
+		public static float GetRandomSign () {
+			return Mathf.Sign(Random.Range (0, 2) - 0.5f);
+		}
 		
 		public static TeamPosition GetOtherPosition (TeamPosition g_teamPosition) {
 			switch (g_teamPosition) {
