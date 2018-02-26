@@ -96,8 +96,8 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 3
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
 --- !u!114 &114052275425334606
@@ -111,7 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130417bf777c74f379d73fc7534f6813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myText: {fileID: 114783736610869722}
+  myText_Name: {fileID: 114783736610869722}
+  myKeysParent: {fileID: 224174789307378666}
 --- !u!114 &114154952817765128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

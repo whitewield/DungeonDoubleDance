@@ -12,7 +12,7 @@ public class CS_HeroStatsDisplay : MonoBehaviour {
 
 	[SerializeField] RectTransform mySkillListRectTransform;
 	[SerializeField] GameObject mySkillPrefab;
-	private List<CS_HeroStatsDisplay_Skill> mySkillList;
+	private List<CS_HeroStatsDisplay_Skill> mySkillList = new List<CS_HeroStatsDisplay_Skill> ();
 
 
 	// Use this for initialization
@@ -31,8 +31,16 @@ public class CS_HeroStatsDisplay : MonoBehaviour {
 			CS_HeroStatsDisplay_Skill t_skill = 
 				Instantiate (mySkillPrefab, mySkillListRectTransform).GetComponent<CS_HeroStatsDisplay_Skill> ();
 
-			t_skill.ShowText (g_skillInfos [i].mySkillName + ": " + g_skillInfos [i].myPattern);
+			mySkillList.Add (t_skill);
+
+			t_skill.ShowName (g_skillInfos [i].mySkillName);
+
+			t_skill.AddKeys (g_skillInfos [i].myPattern);
 		}
+	}
+
+	public void HighlightSkillPattern (int g_index, int g_keyCount) {
+		mySkillList [g_index].Highlight (g_keyCount);
 	}
 
 	public void SetHealth (float g_percent) {

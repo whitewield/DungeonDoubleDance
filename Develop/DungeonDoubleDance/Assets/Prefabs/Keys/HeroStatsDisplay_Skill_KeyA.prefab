@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224299776161524384}
   - component: {fileID: 222497480736354268}
   - component: {fileID: 114548827484907570}
+  - component: {fileID: 114518820641114242}
   m_Layer: 5
   m_Name: HeroStatsDisplay_Skill_KeyA
   m_TagString: Untagged
@@ -45,6 +46,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114518820641114242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166874552299332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e123cc0c42d94d82a67d94af7b6c310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHighlight_Image: {fileID: 114548827484907570}
+  myHighlight_Color_On: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  myHighlight_Color_Off: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114548827484907570
 MonoBehaviour:
   m_ObjectHideFlags: 1
