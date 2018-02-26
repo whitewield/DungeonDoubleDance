@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Global;
+using Hang.SpryShake;
 
 public class CS_Controller : MonoBehaviour {
 
@@ -85,6 +86,16 @@ public class CS_Controller : MonoBehaviour {
 				myHeroBattleInfos [i].myHero.OnKey (g_key);
 			}
 		else {
+			// miss, screen shake
+
+			SpryShakeManager.Instance.CreateShake (
+				Camera.main.transform, 
+				SpryShakeMode.Position,
+				0.1f,
+				new Vector3 (0.2f, 0.5f, 0),
+				new Vector3 (Constants.GetRandomSign () * 50, Constants.GetRandomSign () * 60, 0)
+			);
+
 			for (int i = 0; i < myHeroBattleInfos.Count; i++) {
 				myHeroBattleInfos [i].myHero.ClearKeyRecord ();
 			}

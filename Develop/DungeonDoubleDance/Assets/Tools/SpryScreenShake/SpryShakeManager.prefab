@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1559357062516560}
+  m_RootGameObject: {fileID: 1380374586944366}
   m_IsPrefabParent: 1
---- !u!1 &1559357062516560
+--- !u!1 &1380374586944366
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4784985100960084}
-  - component: {fileID: 114313762331197486}
+  - component: {fileID: 4998438441293540}
+  - component: {fileID: 114165657241370564}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: SpryShakeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4784985100960084
+--- !u!4 &4998438441293540
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559357062516560}
+  m_GameObject: {fileID: 1380374586944366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,26 +40,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114313762331197486
+--- !u!114 &114165657241370564
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559357062516560}
+  m_GameObject: {fileID: 1380374586944366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0179a50e5e7ad483c8df7293c9ec3ca8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c480e7b85a7147678627c7a86fddc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPositions_X:
-  - 3
-  - 6
-  myPositions_Y: -2
-  myStatsKey_A: {fileID: 1166874552299332, guid: 866d8364bde8e41d3bd00b2810d93a1b,
-    type: 2}
-  myStatsKey_B: {fileID: 1304928061250524, guid: 8817a53375aa5424090b48128d2465e7,
-    type: 2}
-  myStatsKey_X: {fileID: 1220002268917462, guid: 8af8558d03d604f9aa34bfe467ca38a8,
-    type: 2}
-  myStatsKey_Y: {fileID: 1493018303700576, guid: 917e6aa16658c4adb804613818a40a7d,
-    type: 2}

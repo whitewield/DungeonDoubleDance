@@ -26,6 +26,13 @@ public class CS_RhythmManager : MonoBehaviour {
 	[SerializeField] Image myBeatDisplay;
 	[SerializeField] Color myBeatDisplay_Color_On = Color.white;
 	[SerializeField] Color myBeatDisplay_Color_Off = Color.black;
+	[SerializeField] RectTransform myBeatCenter;
+	[SerializeField] Vector2 myBeatCenter_Size_On = Vector2.one;
+	[SerializeField] Vector2 myBeatCenter_Size_Off = Vector2.one;
+
+	[SerializeField] RectTransform myBeatLine_Right;
+	[SerializeField] RectTransform myBeatLine_Left;
+	[SerializeField] float myBeatLine_Distance = 200;
 
 	private AudioSource myBeatAudioSource;
 
@@ -64,8 +71,6 @@ public class CS_RhythmManager : MonoBehaviour {
 
 			CS_GameManager.Instance.Beat_Center ();
 			myBeatProcess = BeatProcess.Back_On;
-
-			myBeatAudioSource.Play ();
 			
 		} else if (myBeatProcess == BeatProcess.Back_On && myTimer > myOnBeatTime) {
 			//exit the beat
@@ -78,18 +83,36 @@ public class CS_RhythmManager : MonoBehaviour {
 
 			myBeatProcess = BeatProcess.Fore_Off;
 			myTimer -= myBeatTime;
+
+			myBeatAudioSource.PlayScheduled (AudioSettings.dspTime + (double)myHalfBeatTime);
 		}
 	}
 
+//	void Update () {
+//		
+//	}
+
 	void Update_Display () {
-		float t_process = Mathf.Abs (myTimer);
-		if (t_process > myOnBeatTime) {
+
+		//show beat outline
+		float t_onBeatProcess = Mathf.Abs (myTimer) / myOnBeatTime;
+		if (t_onBeatProcess > 1) {
 			myBeatDisplay.color = myBeatDisplay_Color_Off;
-			return;
+			myBeatCenter.sizeDelta = myBeatCenter_Size_Off;
+		} else {
+			myBeatDisplay.color = (1 - t_onBeatProcess) * myBeatDisplay_Color_On + t_onBeatProcess * myBeatDisplay_Color_Off;
+			myBeatCenter.sizeDelta = (1 - t_onBeatProcess) * myBeatCenter_Size_On + t_onBeatProcess * myBeatCenter_Size_Off;
 		}
 
-		t_process = t_process / myOnBeatTime;
-		myBeatDisplay.color = (1 - t_process) * myBeatDisplay_Color_On + t_process * myBeatDisplay_Color_Off;
+
+
+		//show beat line
+		float t_fullProcess = -(myTimer / myBeatTime);
+		if (t_fullProcess < 0) {
+			t_fullProcess += 1;
+		}
+		myBeatLine_Right.anchoredPosition = new Vector2 (t_fullProcess * myBeatLine_Distance, 0);
+		myBeatLine_Left.anchoredPosition = new Vector2 (-t_fullProcess * myBeatLine_Distance, 0);
 	}
 
 
