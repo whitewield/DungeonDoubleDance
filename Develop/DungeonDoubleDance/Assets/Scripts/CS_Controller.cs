@@ -81,13 +81,14 @@ public class CS_Controller : MonoBehaviour {
 	}
 
 	protected void OnKey (Key g_key) {
-		if (HitBeat () == true)
+		if (HitBeat () == true) {
+			DoOnBeat ();
 			for (int i = 0; i < myHeroBattleInfos.Count; i++) {
 				myHeroBattleInfos [i].myHero.OnKey (g_key);
 			}
-		else {
+		} else {
 			// miss, screen shake
-
+			DoOffBeat ();
 			SpryShakeManager.Instance.CreateShake (
 				Camera.main.transform, 
 				SpryShakeMode.Position,
@@ -100,6 +101,14 @@ public class CS_Controller : MonoBehaviour {
 				myHeroBattleInfos [i].myHero.ClearKeyRecord ();
 			}
 		}
+	}
+
+	protected virtual void DoOnBeat () {
+		
+	}
+
+	protected virtual void DoOffBeat () {
+
 	}
 
 	protected CS_Hero GetHero (TeamPosition g_teamPos) {
