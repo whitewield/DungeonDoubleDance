@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Global {
 
+
 	public enum HeroType {
 		None,
 		Adam,

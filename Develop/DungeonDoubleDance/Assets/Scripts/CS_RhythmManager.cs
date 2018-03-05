@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class CS_RhythmManager : MonoBehaviour {
 
+	[SerializeField] bool useTuning = false;
+	[Range(-0.5f,0.5f)]
+	[SerializeField] float tuningValue = 0;
+	
+	private static CS_RhythmManager instance = null;
+	public static CS_RhythmManager Instance { get { return instance; } }
+
 	public enum BeatProcess {
 		Fore_Off,
 		Fore_On,
@@ -30,13 +37,22 @@ public class CS_RhythmManager : MonoBehaviour {
 	[SerializeField] Vector2 myBeatCenter_Size_On = Vector2.one;
 	[SerializeField] Vector2 myBeatCenter_Size_Off = Vector2.one;
 
+	[SerializeField] RectTransform myBeatLine_Window;
 	[SerializeField] RectTransform myBeatLine_Right;
 	[SerializeField] RectTransform myBeatLine_Left;
 	[SerializeField] float myBeatLine_Distance = 200;
 
 	private AudioSource myBeatAudioSource;
 
+
+
 	void Awake () {
+		if (instance != null && instance != this) {
+			Destroy(this.gameObject);
+		} else {
+			instance = this;
+		}
+
 		myBeatTime = 60.0f / myBPM;
 		Debug.Log ("Time for each beat: " + myBeatTime);
 
@@ -47,6 +63,8 @@ public class CS_RhythmManager : MonoBehaviour {
 		myBeatProcess = BeatProcess.Fore_Off;
 
 		myBeatAudioSource = this.GetComponent<AudioSource> ();
+
+		myBeatLine_Window.sizeDelta = new Vector2 ((myBeatLine_Distance * myOnBeatRatio * 2f), myBeatLine_Window.sizeDelta.y);
 	}
 
 //	// Use this for initialization
@@ -84,7 +102,11 @@ public class CS_RhythmManager : MonoBehaviour {
 			myBeatProcess = BeatProcess.Fore_Off;
 			myTimer -= myBeatTime;
 
-			myBeatAudioSource.PlayScheduled (AudioSettings.dspTime + (double)myHalfBeatTime);
+//			myBeatAudioSource.PlayScheduled ((double)myHalfBeatTime);
+			if (useTuning)
+				myBeatAudioSource.PlayScheduled (AudioSettings.dspTime + (double)(myHalfBeatTime + tuningValue * myBeatTime));
+			else
+				myBeatAudioSource.PlayScheduled (AudioSettings.dspTime + (double)myHalfBeatTime);
 		}
 	}
 
@@ -93,6 +115,8 @@ public class CS_RhythmManager : MonoBehaviour {
 //	}
 
 	void Update_Display () {
+		if (myBeatDisplay.enabled == false)
+			return;
 
 		//show beat outline
 		float t_onBeatProcess = Mathf.Abs (myTimer) / myOnBeatTime;
@@ -115,5 +139,9 @@ public class CS_RhythmManager : MonoBehaviour {
 		myBeatLine_Left.anchoredPosition = new Vector2 (-t_fullProcess * myBeatLine_Distance, 0);
 	}
 
-
+	public float GetAccuracy () {
+		float t_accuracy = 1f - Mathf.Abs (myTimer) / (myOnBeatTime);
+//		Debug.LogWarning ("ACC" + t_accuracy);
+		return t_accuracy;
+	}
 }
