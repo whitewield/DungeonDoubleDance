@@ -259,6 +259,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &942851593
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 457692, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457692, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457692, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457692, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457692, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457692, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457692, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 457692, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 62f6c5669c431491499ec7e6b778a5b9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1319849517
 Prefab:
   m_ObjectHideFlags: 0
@@ -298,6 +340,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 223051665889248732, guid: 0b48857a284ca4ea1aa48c3dfd0fdf8e,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1916602353}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b48857a284ca4ea1aa48c3dfd0fdf8e, type: 2}
   m_IsPrefabParent: 0
@@ -486,7 +533,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.35294116, g: 0.3088414, b: 0.2802768, a: 0}
+  m_BackGroundColor: {r: 0.2794118, g: 0.25696817, b: 0.24243082, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
