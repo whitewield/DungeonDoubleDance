@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Global;
 using JellyJoystick;
+using TMPro;
 
 public class CS_BossController : CS_Controller {
 	[TextArea(3,10)]
 	[SerializeField] string myKeySheet;
 	private char[] myKeySheetArray;
 	private int myKeySheetArray_Index = 0;
+	private int myCountDown;
+	[SerializeField] TextMeshPro myCountDownText;
 
 	protected override void Init () {
 		myBattlefieldSide = BattlefieldSide.Right;
@@ -37,6 +40,9 @@ public class CS_BossController : CS_Controller {
 
 	#region Beats
 	public override void Beat_Center () {
+		if (myCountDown > 0)
+			myCountDown--;
+
 		char t_keyChar = GetCharFromKeySheet ();
 
 		switch (t_keyChar) {
@@ -52,9 +58,19 @@ public class CS_BossController : CS_Controller {
 		case 'Y':
 			OnKey (Key.Y);
 			break;
+		case 'S':
+			myCountDown = 7;
+			break;
 		default:
 			break;
 		}
+
+		// show the count down
+
+		if (myCountDown > 0)
+			myCountDownText.SetText (myCountDown.ToString ());
+		else
+			myCountDownText.SetText ("");
 	}
 
 	#endregion

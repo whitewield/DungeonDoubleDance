@@ -37,7 +37,7 @@ public class CS_HeroStatsDisplay : MonoBehaviour {
 
 			t_skill.AddKeys (g_skillInfos [i].myPattern);
 
-//			t_skill.gameObject.SetActive (false);
+			t_skill.gameObject.SetActive (false);
 		}
 	}
 
