@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Global;
 
 public class CS_RhythmManager : MonoBehaviour {
 
@@ -19,11 +20,11 @@ public class CS_RhythmManager : MonoBehaviour {
 		Back_Off,
 	}
 
-	[SerializeField] int myBPM = 120;
+	[SerializeField] int myBPM = 240;
 	[Range(0,0.5f)]
 	[SerializeField] float myOnBeatRatio = 0.25f;
 
-	private float myBeatTime;
+	private float myBeatTime; // Time for each beat
 	private float myHalfBeatTime;
 	private float myOnBeatTime;
 
@@ -37,10 +38,13 @@ public class CS_RhythmManager : MonoBehaviour {
 	[SerializeField] Vector2 myBeatCenter_Size_On = Vector2.one;
 	[SerializeField] Vector2 myBeatCenter_Size_Off = Vector2.one;
 
-	[SerializeField] RectTransform myBeatLine_Window;
-	[SerializeField] RectTransform myBeatLine_Right;
-	[SerializeField] RectTransform myBeatLine_Left;
-	[SerializeField] float myBeatLine_Distance = 200;
+	[SerializeField] RectTransform myBeatPoint_Window;
+	[SerializeField] float myBeatPoint_Distance = 200;
+	[SerializeField] int myBeatPoint_Count = 11;
+	[SerializeField] GameObject myBeatPoint_Prefab;
+	[SerializeField] RectTransform myBeatPoint_Parent;
+	private List<GameObject> myBeatPoint_List = new List<GameObject> ();
+	private int myBeatPoint_CenterIndex;
 
 	private AudioSource myBeatAudioSource;
 
@@ -64,8 +68,23 @@ public class CS_RhythmManager : MonoBehaviour {
 
 		myBeatAudioSource = this.GetComponent<AudioSource> ();
 
-		myBeatLine_Window.sizeDelta = new Vector2 ((myBeatLine_Distance * myOnBeatRatio * 2f), myBeatLine_Window.sizeDelta.y);
+		myBeatPoint_Window.sizeDelta = new Vector2 ((myBeatPoint_Distance * myOnBeatRatio * 2f), myBeatPoint_Window.sizeDelta.y);
+	
+		InitBeatPoints ();
+
+//		Debug.Log (7 / 2);
 	}
+
+	void InitBeatPoints () {
+		for (int i = 0; i < myBeatPoint_Count; i++) {
+			GameObject t_beat = Instantiate (myBeatPoint_Prefab, myBeatPoint_Parent);
+//			t_beat.GetComponentInChildren<Text> ().text = i.ToString ("0");
+			myBeatPoint_List.Add (t_beat);
+		}
+
+		myBeatPoint_CenterIndex = myBeatPoint_Count / 2;
+	}
+
 
 //	// Use this for initialization
 //	void Start () {
@@ -75,8 +94,9 @@ public class CS_RhythmManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		myTimer += Time.deltaTime;
+		//from -myHalfBeatTime to myHalfBeatTime
 
-		Update_Display ();
+
 
 		if (myBeatProcess == BeatProcess.Fore_Off && myTimer > -myOnBeatTime) {
 			//enter the beat
@@ -89,6 +109,7 @@ public class CS_RhythmManager : MonoBehaviour {
 
 			CS_GameManager.Instance.Beat_Center ();
 			myBeatProcess = BeatProcess.Back_On;
+
 			
 		} else if (myBeatProcess == BeatProcess.Back_On && myTimer > myOnBeatTime) {
 			//exit the beat
@@ -102,12 +123,29 @@ public class CS_RhythmManager : MonoBehaviour {
 			myBeatProcess = BeatProcess.Fore_Off;
 			myTimer -= myBeatTime;
 
+			Update_BeatPointCenter ();
+
 //			myBeatAudioSource.PlayScheduled ((double)myHalfBeatTime);
 			if (useTuning)
 				myBeatAudioSource.PlayScheduled (AudioSettings.dspTime + (double)(myHalfBeatTime + tuningValue * myBeatTime));
 			else
 				myBeatAudioSource.PlayScheduled (AudioSettings.dspTime + (double)myHalfBeatTime);
 		}
+
+
+		Update_Display ();
+	}
+
+	void Update_BeatPointCenter () {
+//		myBeatPoint_List [myBeatPoint_CenterIndex].GetComponent<Image> ().color = Color.red;
+		myBeatPoint_CenterIndex++;
+		myBeatPoint_CenterIndex %= myBeatPoint_Count;
+//
+//		Debug.Log (myBeatPoint_CenterIndex);
+//
+		int t_outBeatIndex = (myBeatPoint_Count / 2 + myBeatPoint_CenterIndex) % myBeatPoint_Count;
+		myBeatPoint_List [t_outBeatIndex].GetComponent<RectTransform> ().sizeDelta = new Vector2 (40, 40);
+		myBeatPoint_List [t_outBeatIndex].GetComponentInChildren<Text> ().text = "";
 	}
 
 //	void Update () {
@@ -132,11 +170,38 @@ public class CS_RhythmManager : MonoBehaviour {
 
 		//show beat line
 		float t_fullProcess = -(myTimer / myBeatTime);
-		if (t_fullProcess < 0) {
-			t_fullProcess += 1;
+//		if (t_fullProcess < 0) {
+//			t_fullProcess += 1;
+//		}
+
+		// t_fullProcess (1->0), 0 = onBeat
+
+//		Debug.Log (t_fullProcess);
+
+		for (int i = 0; i < myBeatPoint_List.Count; i++) {
+
+			//from -half to half
+
+			int t_index = i - myBeatPoint_CenterIndex;
+			if (t_index > myBeatPoint_Count / 2) {
+				t_index = t_index - myBeatPoint_Count;
+			} else if (t_index < -myBeatPoint_Count/2){
+				t_index = t_index + myBeatPoint_Count;
+			}
+
+			myBeatPoint_List [i].GetComponent<RectTransform> ().anchoredPosition = 
+				new Vector2 ((t_index + t_fullProcess) * myBeatPoint_Distance, 0);
+
+//			Debug.Log(i + ":" + )
 		}
-		myBeatLine_Right.anchoredPosition = new Vector2 (t_fullProcess * myBeatLine_Distance, 0);
-		myBeatLine_Left.anchoredPosition = new Vector2 (-t_fullProcess * myBeatLine_Distance, 0);
+
+//		myBeatLine_Right.anchoredPosition = new Vector2 (t_fullProcess * myBeatLine_Distance, 0);
+//		myBeatLine_Left.anchoredPosition = new Vector2 (-t_fullProcess * myBeatLine_Distance, 0);
+	}
+
+	public void ShowBeat (Key g_key) {
+		myBeatPoint_List [myBeatPoint_CenterIndex].GetComponent<RectTransform> ().sizeDelta = new Vector2 (80, 80);
+		myBeatPoint_List [myBeatPoint_CenterIndex].GetComponentInChildren<Text> ().text = g_key.ToString ();
 	}
 
 	public float GetAccuracy () {

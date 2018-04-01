@@ -53,11 +53,13 @@ public class CS_PlayerController : CS_Controller {
 		}
 	}
 
-	protected override void DoOnBeat () {
+	protected override void DoOnBeat (Key g_key) {
 		float t_accuracy = CS_RhythmManager.Instance.GetAccuracy ();
 //		Debug.LogWarning ("DoOnBeat" + t_accuracy);
 		myBeatFeedback.Show (t_accuracy);
 		ModifyBarValue (t_accuracy * t_accuracy * myBar_ValueOnBeatMultiplier);
+
+		CS_RhythmManager.Instance.ShowBeat (g_key);
 	}
 
 	protected override void DoOffBeat () {

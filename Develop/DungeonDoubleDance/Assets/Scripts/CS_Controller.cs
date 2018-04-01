@@ -82,7 +82,7 @@ public class CS_Controller : MonoBehaviour {
 
 	protected void OnKey (Key g_key) {
 		if (HitBeat () == true) {
-			DoOnBeat ();
+			DoOnBeat (g_key);
 			for (int i = 0; i < myHeroBattleInfos.Count; i++) {
 				myHeroBattleInfos [i].myHero.OnKey (g_key);
 			}
@@ -103,7 +103,7 @@ public class CS_Controller : MonoBehaviour {
 		}
 	}
 
-	protected virtual void DoOnBeat () {
+	protected virtual void DoOnBeat (Key g_key) {
 		
 	}
 
