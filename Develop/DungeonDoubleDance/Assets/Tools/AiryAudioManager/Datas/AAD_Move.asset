@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51fffa709c363444fbd9a971338a4e42, type: 3}
+  m_Name: AAD_Move
+  m_EditorClassIdentifier: 
+  myName: Move
+  myAudioClips:
+  - {fileID: 8300000, guid: 56e915f54436741258a888030098ec05, type: 3}
+  - {fileID: 8300000, guid: 660ffb0240dcf4f63a76a0d3202e2654, type: 3}
+  - {fileID: 8300000, guid: db569ed1b5c93492b8ea7b68fd173454, type: 3}
+  - {fileID: 8300000, guid: 2768aad44620b4a188754ddcaf49d2ed, type: 3}
+  myVolume: 0.1
+  isRandomVolume: 0
+  myVolumeRange: {x: 1, y: 1}
+  myPitch: 1
+  isRandomPitch: 1
+  myPitchRange: {x: 0.9, y: 1.1}

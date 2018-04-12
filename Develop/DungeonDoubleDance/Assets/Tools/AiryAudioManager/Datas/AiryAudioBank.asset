@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d6c232778d544518f828ee7176837f, type: 3}
+  m_Name: AiryAudioBank
+  m_EditorClassIdentifier: 
+  mySnapshots:
+  - myName: None
+    mySnapshot: {fileID: 245175552642949306, guid: 582106a0367984a5e87798faf19f7073,
+      type: 2}
+  - myName: Menu
+    mySnapshot: {fileID: 24500006, guid: 582106a0367984a5e87798faf19f7073, type: 2}
+  - myName: Battle
+    mySnapshot: {fileID: 245791943496798202, guid: 582106a0367984a5e87798faf19f7073,
+      type: 2}
+  - myName: Settings
+    mySnapshot: {fileID: 245703266110179850, guid: 582106a0367984a5e87798faf19f7073,
+      type: 2}
+  myBank: []
